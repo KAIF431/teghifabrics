@@ -4,121 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>TEGHI — Luxury Fabrics & Textiles | Malad West, Mumbai</title>
-  <meta name="description" content="Discover premium imported heavy worked nets, pure mulberry silks, cotton satins, and couture bridal dress materials at TEGHI Fabric Showroom, Malad West.">
-  <meta name="theme-color" content="#FAF8F5">
+  <meta name="description" content="Explore imported handworked nets, pure mulberry silks, and couture bridal dress materials at TEGHI Fabric Showroom, Malad West, Mumbai.">
+  <meta name="theme-color" content="#141210">
   
-  <!-- Preconnect to Fonts for Speed -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Sticky Luxury Header -->
+  <!-- 1. Afternow-Style Curtain Intro Overlay -->
+  <div class="afternow-curtain" id="afternow-curtain" aria-hidden="true">
+    <div class="curtain-center-content">
+      <div class="curtain-monogram">T</div>
+      <h1 class="curtain-title">TEGHI</h1>
+      <span class="curtain-subtitle">Luxury Fabrics & Textiles</span>
+    </div>
+  </div>
+
+  <!-- 2. Sticky Showroom Header -->
   <header class="header">
     <div class="header-container">
       <div class="brand-wrapper">
         <a href="index.html" style="text-decoration: none; color: inherit;">
-          <h1 class="brand-title">TEGHI</h1>
+          <span class="brand-title">TEGHI</span>
           <span class="brand-subtitle">Luxury Fabrics & Textiles</span>
         </a>
       </div>
       <div class="header-actions">
-        <a href="admin.html" class="btn-admin-pill" title="Shop Owner Portal">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <a href="admin.html" class="btn-header-admin" title="Shop Owner Management">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
           Owner Portal
         </a>
         <a href="#" id="btn-header-wa" class="btn-header-wa" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-          WhatsApp
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Inquire
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-text-content">
-      <div class="hero-badge-wrap">
-        <span class="luxury-badge">Interactive Textile Museum & Showroom</span>
+  <!-- 3. Top 3D Coverflow Slider (Direct from Notebook Sketch) -->
+  <section class="coverflow-section" id="showroom-slider">
+    <div class="coverflow-header">
+      <div>
+        <span class="coverflow-meta-tag">Signature Highlights</span>
+        <h2 class="coverflow-heading">Curated Showcase</h2>
       </div>
-      <h2 class="hero-heading">
-        Curators of <em>Fine Weaves</em> & Imported Worked Nets
-      </h2>
-      <p class="hero-description">
-        Step into an extraordinary digital fabric experience. From heavy zardozi handworked nets and pure mulberry silks to fluid luxury satins — explore textures, inspect 1000+ colours, and connect directly with our showroom experts.
-      </p>
-
-      <div class="hero-card-pills" style="margin-bottom: 0;">
-        <span class="info-pill gold">✦ Imported Handwork Nets</span>
-        <span class="info-pill">✦ Per Metre & Complete Sets</span>
-        <span class="info-pill">✦ Malad (W), Mumbai</span>
+      <div class="coverflow-controls">
+        <button class="coverflow-nav-btn" id="btn-coverflow-prev" aria-label="Previous Slide">&#8592;</button>
+        <button class="coverflow-nav-btn" id="btn-coverflow-next" aria-label="Next Slide">&#8594;</button>
       </div>
     </div>
 
-    <!-- Featured Hero Spotlight Card: Imported Worked Net -->
-    <div class="hero-showcase-card" onclick="window.TeghiApp.openInspection('heavy-worked-net')">
-      <div class="hero-image-container">
-        <img class="hero-image" src="images/heavy-worked-net.jpg" alt="Imported Heavy Worked Net Fabric" loading="eager">
-        <span class="hero-spotlight-tag">Showcase of the Month</span>
-      </div>
-      <div class="hero-card-body">
-        <div class="hero-card-meta">
-          <span class="hero-fabric-category">Signature Net Collection</span>
-          <span class="hero-price-tag">₹2,450 <small>/ metre</small></span>
-        </div>
-        <h3 class="hero-card-title">Imported Heavy Handworked Net</h3>
-        <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-          Sheer champagne-ivory tulle featuring intricate handcrafted gold zardozi, micro-sequins, and delicate pearl motifs. Available per metre or as a complete 4-piece dress set.
-        </p>
-        <div class="hero-card-pills">
-          <span class="info-pill gold">Complete Dress Set Available (₹6,800)</span>
-          <span class="info-pill">8 Curated Shades</span>
-        </div>
-        <button class="hero-cta-btn">
-          <span>Inspect Fabric & Choose Colour</span>
-          <span>✦</span>
-        </button>
-      </div>
+    <!-- 3D Viewport containing Stepped Cards -->
+    <div class="coverflow-viewport" id="coverflow-viewport">
+      <!-- Injected and updated dynamically via app.js -->
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="coverflow-dots" id="coverflow-dots">
+      <!-- Injected via JavaScript -->
     </div>
   </section>
 
-  <!-- Museum Story Strip -->
-  <section class="museum-story-strip">
-    <div class="museum-inner">
-      <span class="museum-title-tag">The Art of Fine Textiles</span>
-      <p class="museum-text">
-        "Kapda sirf ek pehnaawa nahi, ek ehsaas hai. Humare har thaan aur har net mein daastankari, shahi karigari aur barso ka vishwas buna hua hai."
-      </p>
-      <div class="museum-highlights-grid">
-        <div class="museum-stat">
-          <div class="museum-stat-num">1000+</div>
-          <div class="museum-stat-label">Colour Shades in Store</div>
-        </div>
-        <div class="museum-stat">
-          <div class="museum-stat-num">100%</div>
-          <div class="museum-stat-label">Curated Handcraft Quality</div>
-        </div>
-        <div class="museum-stat">
-          <div class="museum-stat-num">2-in-1</div>
-          <div class="museum-stat-label">Per Metre or Complete Sets</div>
-        </div>
-        <div class="museum-stat">
-          <div class="museum-stat-num">Direct</div>
-          <div class="museum-stat-label">WhatsApp Video Curation</div>
-        </div>
+  <!-- 4. 'Latest' Section & Fabric Catalogue (Direct from Notebook Sketch) -->
+  <section class="latest-section" id="latest-section">
+    <div class="latest-header-row">
+      <div class="latest-title-group">
+        <span class="latest-badge">Exclusive Weaves</span>
+        <h2 class="latest-heading">Latest Collections</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- Fabric Catalogue Section -->
-  <section class="catalogue-section" id="collections">
-    <div class="section-header">
-      <span class="section-subtitle">Curated Showroom Catalogue</span>
-      <h2 class="section-title">Explore Our Fabric Collections</h2>
     </div>
 
     <!-- Category Filter Bar -->
@@ -134,20 +93,20 @@
       </div>
     </div>
 
-    <!-- Product Grid (Populated dynamically from app.js / synced with Admin) -->
+    <!-- Products Grid (With Bookmark/Save Button) -->
     <div class="products-grid" id="products-grid">
       <!-- Injected via JavaScript -->
     </div>
   </section>
 
-  <!-- Physical Showroom Location & Trust Section -->
+  <!-- 5. Showroom Location & Contact (UNTOUCHED PER USER REQUEST SCREENSHOT) -->
   <section class="location-section" id="visit">
     <div class="location-card">
-      <span class="location-meta-tag">Visit Our Showroom</span>
+      <span class="location-meta-tag">VISIT OUR FLAGSHIP STORE</span>
       <h3 class="location-title">Teghi Chadar Store</h3>
       <p class="location-address">
         Shop No. 4, Ground Floor, Near Station Road, Malad (West), Mumbai, Maharashtra 400064.<br>
-        <strong>Timings:</strong> Monday to Saturday: 11:00 AM – 9:30 PM | Sunday: 12:00 PM – 8:30 PM
+        <strong>Showroom Hours:</strong> Monday to Saturday: 11:00 AM – 9:30 PM | Sunday: 12:00 PM – 8:30 PM
       </p>
       <div class="location-actions">
         <a href="https://maps.app.goo.gl/wzbqBGXs7CZ5cxT77" target="_blank" rel="noopener" class="btn-maps">
@@ -162,64 +121,101 @@
     </div>
   </section>
 
-  <!-- Luxury Footer -->
+  <!-- 6. Dark Luxury Footer (UNTOUCHED PER USER REQUEST SCREENSHOT) -->
   <footer class="footer">
     <div class="footer-brand">TEGHI</div>
-    <div class="footer-sub">Luxury Fabrics & Textiles · Malad West</div>
+    <div class="footer-sub">LUXURY FABRICS & TEXTILES · MALAD (WEST), MUMBAI</div>
     <p class="footer-disclaimer">
-      A digital showcase initiative by Teghi Chadar Store. All fabrics are authentic handpicked textiles. Colours and shades may vary slightly due to digital screen lighting.
+      A digital showcase initiative by Teghi Chadar Store. All fabrics represent authentic, handpicked textiles. Actual shades may vary subtly due to digital lighting and screen calibrations.
     </p>
     <div class="footer-links">
-      <a href="#collections" class="footer-link">Collections</a>
+      <a href="#showroom-slider" class="footer-link">Showcase</a>
       <span>·</span>
-      <a href="#visit" class="footer-link">Showroom Location</a>
+      <a href="#latest-section" class="footer-link">Collections</a>
       <span>·</span>
-      <a href="admin.html" class="footer-link" style="color: var(--gold-light);">Owner Admin Dashboard</a>
+      <a href="#visit" class="footer-link">Flagship Location</a>
+      <span>·</span>
+      <a href="admin.html" class="footer-link" style="color: var(--gold-light);">Owner Portal</a>
     </div>
     <div class="footer-copyright">
       &copy; 2026 TEGHI — Luxury Fabrics. All rights reserved.
     </div>
   </footer>
 
-  <!-- ==========================================================================
-       FABRIC INSPECTION BOTTOM SHEET (MODAL)
-       ========================================================================== -->
+  <!-- 7. Fixed Mobile Bottom Navigation Bar (Direct from Notebook Sketch: "Yeh fixed hona chahiye") -->
+  <nav class="fixed-bottom-bar" id="fixed-bottom-bar">
+    <a href="#showroom-slider" class="bottom-nav-item active" id="tab-home">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span>Home</span>
+    </a>
+    <button class="bottom-nav-item" id="tab-saved" onclick="window.TeghiApp.openSavedDrawer()">
+      <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+      <span class="nav-badge-count" id="saved-badge">0</span>
+      <span>Saved</span>
+    </button>
+    <a href="#visit" class="bottom-nav-item" id="tab-about">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <span>About</span>
+    </a>
+  </nav>
+
+  <!-- 8. Saved Fabrics Shortlist Drawer -->
+  <div class="saved-drawer-backdrop" id="saved-drawer-backdrop" role="dialog" aria-modal="true">
+    <div class="saved-drawer-sheet">
+      <div class="saved-header">
+        <div>
+          <span style="font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); font-weight: 700;">Your Shortlist</span>
+          <h3 class="saved-title">Saved Fabrics (<span id="saved-header-count">0</span>)</h3>
+        </div>
+        <button class="modal-close-btn" onclick="window.TeghiApp.closeSavedDrawer()">&times;</button>
+      </div>
+
+      <div id="saved-items-container">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <a href="#" id="btn-inquire-all-wa" class="btn-inquire-all-wa" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <span>Inquire All Saved Fabrics via WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 9. Fabric Inspection Bottom Sheet (Modal) -->
   <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-sheet">
       <div class="modal-grab-bar"></div>
       
       <div class="modal-header">
         <div>
-          <span class="modal-category-sub" id="modal-category">Net Collection</span>
-          <h3 class="modal-title" id="modal-title">Imported Heavy Worked Net</h3>
+          <span class="modal-category-sub" id="modal-category">Collection</span>
+          <h3 class="modal-title" id="modal-title">Fabric Inspection</h3>
         </div>
-        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Inspection">&times;</button>
+        <button class="modal-close-btn" id="modal-close-btn" onclick="window.TeghiApp.closeInspection()" aria-label="Close Inspection">&times;</button>
       </div>
 
       <div class="modal-body">
-        <!-- Big Tactile Photo Viewer -->
         <div class="modal-hero-view">
           <img class="modal-hero-img" id="modal-hero-img" src="images/heavy-worked-net.jpg" alt="Fabric View">
         </div>
 
         <p id="modal-description" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
-          Description loads here...
+          Detailed fabric narrative...
         </p>
 
-        <!-- Purchase Mode Toggle (Per Metre vs Complete Dress Set) -->
+        <!-- Mode Toggle (Per Metre vs Complete Dress Set) -->
         <div class="purchase-mode-wrapper" id="purchase-mode-wrapper">
           <button class="purchase-mode-btn active" id="btn-mode-metre">Per Metre (Cut Length)</button>
           <button class="purchase-mode-btn" id="btn-mode-set">Complete Dress Set</button>
         </div>
 
-        <!-- Inclusions Note (Shown when Dress Set is selected) -->
         <div class="set-inclusion-note" id="set-inclusion-note">
-          <strong>Dress Set Includes:</strong> Heavy Worked Net (2.5m) + Matching Embroidered Dupatta + Soft Cotton Astar (Lining) + Shantoon Salwar (2.5m)
+          <strong>Dress Set Inclusions:</strong> Heavy Worked Net (2.5m) + Matching Dupatta + Soft Cotton Astar (Lining) + Shantoon Salwar Fabric (2.5m)
         </div>
 
-        <!-- Metre / Set Quantity Counter -->
+        <!-- Quantity Stepper -->
         <div class="metre-selector-wrap">
-          <div class="metre-label-group">
+          <div>
             <span class="metre-label" id="stepper-label-title">Required Length</span>
             <span class="metre-rate-unit" id="stepper-rate-unit">(Rate: ₹2,450/m)</span>
           </div>
@@ -230,22 +226,22 @@
           </div>
         </div>
 
-        <!-- Intelligent Colour Swatches Grid -->
+        <!-- Colour Swatches -->
         <div class="swatches-section">
           <div class="swatches-header">
-            <span class="swatches-title">Select Colour Shade</span>
+            <span class="swatches-title">Select Colour Variation</span>
             <span class="swatch-selected-name" id="swatch-selected-name">Champagne Ivory</span>
           </div>
           <div class="swatches-grid" id="swatches-grid">
             <!-- Swatches injected via JavaScript -->
           </div>
           <div class="swatch-more-box">
-            <span>Looking for an exact matching shade?</span>
+            <span>Looking for a bespoke matching shade?</span>
             <strong>1000+ In-Store Shades</strong>
           </div>
         </div>
 
-        <!-- Dynamic Estimated Price Calculation -->
+        <!-- Estimate Box -->
         <div class="estimate-summary-box">
           <div>
             <div class="estimate-label">Estimated Total</div>
@@ -254,16 +250,14 @@
           <div class="estimate-value" id="estimate-value">₹6,125</div>
         </div>
 
-        <!-- Direct WhatsApp Enquiry CTA -->
         <a href="#" id="btn-whatsapp-submit" class="btn-whatsapp-submit" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-          <span>Send Enquiry on WhatsApp</span>
+          <span>Send Inquiry via WhatsApp</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Main JavaScript File -->
   <script src="app.js"></script>
 </body>
 </html>

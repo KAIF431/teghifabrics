@@ -1,21 +1,22 @@
 /* ==========================================================================
    TEGHI — LUXURY FABRICS & TEXTILES
-   Mobile-First Owner Admin Panel Logic
-   Simple, Intuitive & No-Code Operations for Smartphone
+   Showroom Owner Mobile Admin Logic
+   Smart Auto-Crop Hero Banner Manager + Price Editor + Analytics
    ========================================================================== */
 
 (function () {
   'use strict';
 
   const LS_FABRICS_KEY = 'teghi_fabrics_v1';
+  const LS_SLIDES_KEY = 'teghi_hero_slides_v1';
   const LS_WHATSAPP_KEY = 'teghi_whatsapp_phone';
   const LS_VISITORS_KEY = 'teghi_monthly_visitors';
   const LS_ENQUIRIES_KEY = 'teghi_monthly_enquiries';
   const OWNER_PIN = '1234';
 
   let fabrics = [];
+  let slides = [];
 
-  // Elements
   const pinSection = document.getElementById('pin-section');
   const dashboardContent = document.getElementById('dashboard-content');
   const pinInput = document.getElementById('owner-pin');
@@ -24,7 +25,6 @@
   const toast = document.getElementById('toast');
   const toastText = document.getElementById('toast-text');
 
-  // Verify PIN
   function verifyPin() {
     const val = pinInput.value.trim();
     if (val === OWNER_PIN) {
@@ -41,11 +41,11 @@
     pinSection.style.display = 'none';
     dashboardContent.style.display = 'block';
     loadMetrics();
+    loadHeroSlides();
     loadStoreSettings();
     loadProductsList();
   }
 
-  // Toast Helper
   function showToast(message) {
     toastText.textContent = message;
     toast.classList.add('show');
@@ -54,7 +54,6 @@
     }, 3200);
   }
 
-  // Metrics (Monthly Visitors, Enquiries, Conversion Rate)
   function loadMetrics() {
     const visitors = parseInt(localStorage.getItem(LS_VISITORS_KEY) || '1421', 10);
     const enquiries = parseInt(localStorage.getItem(LS_ENQUIRIES_KEY) || '185', 10);
@@ -65,7 +64,125 @@
     document.getElementById('stat-conversion').textContent = `${convRate}%`;
   }
 
-  // Store Settings (Dynamic WhatsApp Number)
+  // ==========================================================================
+  // SMART AUTO-ADJUST CANVAS CROP ENGINE
+  // Center-crops and normalizes photos of ANY size/orientation without distortion
+  // ==========================================================================
+  function normalizeAndCompressImage(file, targetWidth, targetHeight, callback) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext('2d');
+
+        // Calculate aspect ratios for center crop (cover)
+        const sourceAspect = img.width / img.height;
+        const targetAspect = targetWidth / targetHeight;
+
+        let renderWidth, renderHeight, offsetX, offsetY;
+
+        if (sourceAspect > targetAspect) {
+          // Image is wider than target
+          renderHeight = img.height;
+          renderWidth = img.height * targetAspect;
+          offsetX = (img.width - renderWidth) / 2;
+          offsetY = 0;
+        } else {
+          // Image is taller than target
+          renderWidth = img.width;
+          renderHeight = img.width / targetAspect;
+          offsetX = 0;
+          offsetY = (img.height - renderHeight) / 2;
+        }
+
+        // Draw center-cropped portion
+        ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight, 0, 0, targetWidth, targetHeight);
+        callback(canvas.toDataURL('image/jpeg', 0.82));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ==========================================================================
+  // HERO 3D COVERFLOW SLIDES MANAGER
+  // ==========================================================================
+  function loadHeroSlides() {
+    const saved = localStorage.getItem(LS_SLIDES_KEY);
+    if (saved) {
+      try { slides = JSON.parse(saved); } catch (e) { slides = []; }
+    } else {
+      slides = [
+        {
+          id: 'slide-1',
+          fabricId: 'heavy-worked-net',
+          tag: 'Signature Showcase',
+          title: 'Imported Worked Net',
+          desc: 'Intricate zardozi embroidery & delicate pearls on sheer tulle.',
+          image: 'images/heavy-worked-net.jpg',
+          price: '₹2,450 / m'
+        },
+        {
+          id: 'slide-2',
+          fabricId: 'pure-silk',
+          tag: 'Heritage Weave',
+          title: 'Mulberry Raw Silk',
+          desc: 'Natural artisanal slub weave with royal emerald sheen.',
+          image: 'images/pure-silk.jpg',
+          price: '₹1,650 / m'
+        },
+        {
+          id: 'slide-3',
+          fabricId: 'liquid-satin',
+          tag: 'Fluid Drape',
+          title: 'Liquid Champagne Satin',
+          desc: 'Liquid gloss finish with featherweight bridal drape.',
+          image: 'images/satin.jpg',
+          price: '₹890 / m'
+        }
+      ];
+    }
+    renderAdminSlides();
+  }
+
+  function renderAdminSlides() {
+    const container = document.getElementById('admin-slides-list');
+    if (!container) return;
+
+    container.innerHTML = slides.map((slide, idx) => `
+      <div class="admin-slide-row">
+        <img class="admin-slide-thumb" src="${slide.image}" alt="${slide.title}" onerror="this.src='images/heavy-worked-net.jpg'">
+        <div class="admin-slide-info">
+          <div class="admin-slide-title">Slide ${idx + 1}: ${slide.title}</div>
+          <div class="admin-slide-meta">${slide.tag} · ${slide.price}</div>
+          <label class="btn-slide-upload" style="margin-top: 0.35rem;">
+            <span>📸 Change Photo from Phone</span>
+            <input type="file" accept="image/*" style="display: none;" onchange="window.TeghiAdmin.uploadSlideImage(${idx}, this)">
+          </label>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function uploadSlideImage(slideIndex, inputElem) {
+    if (inputElem.files && inputElem.files[0]) {
+      const file = inputElem.files[0];
+      // Target aspect ratio for coverflow cards: 440 x 520
+      normalizeAndCompressImage(file, 440, 520, (dataUrl) => {
+        slides[slideIndex].image = dataUrl;
+        localStorage.setItem(LS_SLIDES_KEY, JSON.stringify(slides));
+        renderAdminSlides();
+        showToast(`Slide ${slideIndex + 1} photo auto-adjusted and updated!`);
+      });
+    }
+  }
+
+  // ==========================================================================
+  // STORE SETTINGS (DYNAMIC WHATSAPP NUMBER)
+  // ==========================================================================
   function loadStoreSettings() {
     const currentNumber = localStorage.getItem(LS_WHATSAPP_KEY) || '919876543210';
     const input = document.getElementById('input-wa-number');
@@ -76,27 +193,24 @@
     const input = document.getElementById('input-wa-number');
     let phone = input.value.replace(/[^0-9]/g, '');
     if (!phone || phone.length < 10) {
-      alert('Kripya valid 10-digit phone number enter karein.');
+      alert('Please enter a valid 10-digit phone number with country code.');
       return;
     }
-    // Prefix 91 if user entered 10 digits
     if (phone.length === 10) {
       phone = '91' + phone;
     }
     localStorage.setItem(LS_WHATSAPP_KEY, phone);
     input.value = phone;
-    showToast('WhatsApp Number Updated! Website par turant apply ho gaya.');
+    showToast('WhatsApp number updated. Applied across all showroom inquiry buttons.');
   }
 
-  // Product List Management
+  // ==========================================================================
+  // PRODUCT CATALOG & PRICE EDITOR
+  // ==========================================================================
   function loadProductsList() {
     const saved = localStorage.getItem(LS_FABRICS_KEY);
     if (saved) {
-      try {
-        fabrics = JSON.parse(saved);
-      } catch (e) {
-        fabrics = [];
-      }
+      try { fabrics = JSON.parse(saved); } catch (e) { fabrics = []; }
     }
     renderAdminProducts();
   }
@@ -106,7 +220,7 @@
     if (!list) return;
 
     if (fabrics.length === 0) {
-      list.innerHTML = `<p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem;">Koi fabric nahi mila.</p>`;
+      list.innerHTML = `<p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem;">No fabrics found in catalog.</p>`;
       return;
     }
 
@@ -123,7 +237,7 @@
         <div class="admin-prod-actions">
           <button class="btn-toggle-stock ${f.inStock !== false ? 'in-stock' : 'out-stock'}" 
                   onclick="window.TeghiAdmin.toggleStock(${idx})">
-            ${f.inStock !== false ? '● In Stock' : '✕ Out of Stock'}
+            ${f.inStock !== false ? '● In Stock' : '✕ Sold Out'}
           </button>
           <button class="btn-edit-inline" onclick="window.TeghiAdmin.editPrice(${idx})">
             Edit Rate
@@ -137,17 +251,17 @@
     fabrics[index].inStock = fabrics[index].inStock === false ? true : false;
     saveFabricsToStorage();
     renderAdminProducts();
-    showToast(`${fabrics[index].name} stock status updated!`);
+    showToast(`${fabrics[index].name} stock availability updated.`);
   }
 
   function editPrice(index) {
     const f = fabrics[index];
-    const newPrice = prompt(`'${f.name}' ka naya Per Metre Rate enter karein (₹):`, f.perMetrePrice);
+    const newPrice = prompt(`Enter new Per-Metre Rate for '${f.name}' (₹):`, f.perMetrePrice);
     if (newPrice !== null && !isNaN(newPrice) && newPrice.trim() !== '') {
       f.perMetrePrice = parseInt(newPrice, 10);
       
       if (f.hasDressSet) {
-        const newSetPrice = prompt(`'${f.name}' ka Complete Dress Set Rate enter karein (₹):`, f.dressSetPrice);
+        const newSetPrice = prompt(`Enter new Complete Dress Set Rate for '${f.name}' (₹):`, f.dressSetPrice);
         if (newSetPrice !== null && !isNaN(newSetPrice) && newSetPrice.trim() !== '') {
           f.dressSetPrice = parseInt(newSetPrice, 10);
         }
@@ -155,7 +269,7 @@
 
       saveFabricsToStorage();
       renderAdminProducts();
-      showToast('Naye rates website par update ho gaye!');
+      showToast('New pricing applied successfully.');
     }
   }
 
@@ -163,41 +277,6 @@
     localStorage.setItem(LS_FABRICS_KEY, JSON.stringify(fabrics));
   }
 
-  // Compress image on mobile client
-  function compressImage(file, callback) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const img = new Image();
-      img.onload = function () {
-        const canvas = document.createElement('canvas');
-        const maxDim = 600;
-        let width = img.width;
-        let height = img.height;
-
-        if (width > height) {
-          if (width > maxDim) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          }
-        } else {
-          if (height > maxDim) {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-        callback(canvas.toDataURL('image/jpeg', 0.8));
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  // Add New Product
   function handleAddProduct() {
     const name = document.getElementById('new-name').value.trim();
     const category = document.getElementById('new-category').value;
@@ -207,7 +286,7 @@
     const photoInput = document.getElementById('new-photo');
 
     if (!name || isNaN(priceMetre) || priceMetre <= 0) {
-      alert('Kripya fabric ka naam aur valid per metre price enter karein.');
+      alert('Please enter a valid fabric name and per-metre price.');
       return;
     }
 
@@ -220,9 +299,9 @@
         perMetrePrice: priceMetre,
         hasDressSet: hasSet,
         dressSetPrice: priceSet,
-        dressSetIncludes: hasSet ? 'Complete Matching Dress Set + Dupatta + Astar + Salwar' : '',
+        dressSetIncludes: hasSet ? 'Complete Coordinated Dress Set + Dupatta + Astar + Salwar Fabric' : '',
         badge: 'New Arrival',
-        description: `Premium ${category} fabric curated exclusively at TEGHI Showroom.`,
+        description: `Premium handpicked ${category} textile curated at TEGHI Luxury Fabrics.`,
         swatches: [
           { name: 'Champagne Ivory', hex: '#F3EDE2' },
           { name: 'Rose Gold', hex: '#B76E79' },
@@ -235,7 +314,6 @@
       saveFabricsToStorage();
       renderAdminProducts();
 
-      // Reset form
       document.getElementById('new-name').value = '';
       document.getElementById('new-price-metre').value = '';
       document.getElementById('new-price-set').value = '';
@@ -243,19 +321,17 @@
       document.getElementById('set-price-group').style.display = 'none';
       photoInput.value = '';
 
-      showToast(`'${name}' website par add ho gaya!`);
+      showToast(`'${name}' published to showroom catalogue.`);
     };
 
     if (photoInput.files && photoInput.files[0]) {
-      compressImage(photoInput.files[0], saveItem);
+      normalizeAndCompressImage(photoInput.files[0], 500, 500, saveItem);
     } else {
       saveItem(null);
     }
   }
 
-  // Event Listeners
   document.addEventListener('DOMContentLoaded', () => {
-    // Check if already authenticated this session
     if (sessionStorage.getItem('teghi_owner_authenticated') === 'true') {
       showDashboard();
     }
@@ -267,7 +343,6 @@
 
     document.getElementById('btn-save-phone').addEventListener('click', saveStoreSettings);
 
-    // Toggle Add form
     const toggleAdd = document.getElementById('toggle-add-form');
     const addContainer = document.getElementById('add-product-container');
     const collapseIcon = document.getElementById('collapse-icon');
@@ -282,30 +357,29 @@
       }
     });
 
-    // Toggle Dress set price input
     document.getElementById('new-has-set').addEventListener('change', (e) => {
       document.getElementById('set-price-group').style.display = e.target.checked ? 'block' : 'none';
     });
 
-    // Save New Fabric
     document.getElementById('btn-save-new-fabric').addEventListener('click', handleAddProduct);
 
-    // Reset Factory Demo
     document.getElementById('btn-reset-demo').addEventListener('click', () => {
-      if (confirm('Kya aap saare demo fabrics aur WhatsApp settings ko default par reset karna chahte hain?')) {
+      if (confirm('Are you sure you want to restore default demo fabrics and settings?')) {
         localStorage.removeItem(LS_FABRICS_KEY);
+        localStorage.removeItem(LS_SLIDES_KEY);
         localStorage.removeItem(LS_WHATSAPP_KEY);
         loadProductsList();
+        loadHeroSlides();
         loadStoreSettings();
-        showToast('Factory demo settings restored!');
+        showToast('Default showroom settings restored.');
       }
     });
   });
 
-  // Global Export
   window.TeghiAdmin = {
     toggleStock,
-    editPrice
+    editPrice,
+    uploadSlideImage
   };
 
 })();

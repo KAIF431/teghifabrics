@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>TEGHI — Mobile Owner Admin Panel</title>
+  <title>TEGHI — Showroom Owner Portal</title>
   <meta name="theme-color" content="#1A1715">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,6 @@
   
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Mobile-First Admin Specific Styling */
     body {
       background-color: #F6F4F0;
       color: #1A1715;
@@ -82,11 +81,10 @@
       padding: 0 1rem;
     }
 
-    /* Auth PIN Card */
     .pin-auth-card {
       background: #FFFFFF;
       border-radius: var(--radius-lg);
-      padding: 2rem 1.5rem;
+      padding: 2.25rem 1.5rem;
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-md);
       text-align: center;
@@ -143,7 +141,6 @@
       color: var(--text-primary);
     }
 
-    /* Analytics Dashboard Cards */
     .analytics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -193,7 +190,6 @@
       margin-top: 0.25rem;
     }
 
-    /* Admin Section Block */
     .admin-card-section {
       background: #FFFFFF;
       border-radius: var(--radius-lg);
@@ -219,7 +215,6 @@
       line-height: 1.5;
     }
 
-    /* Form Inputs */
     .form-group {
       margin-bottom: 1rem;
     }
@@ -271,7 +266,59 @@
       color: var(--text-primary);
     }
 
-    /* Toast Notification */
+    /* Hero Slide Row in Admin */
+    .admin-slide-row {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .admin-slide-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border-medium);
+    }
+
+    .admin-slide-info {
+      flex-grow: 1;
+    }
+
+    .admin-slide-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .admin-slide-meta {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
+
+    .btn-slide-upload {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-medium);
+      background: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-slide-upload:hover {
+      background: var(--color-sand);
+    }
+
     .toast-msg {
       position: fixed;
       bottom: 1.5rem;
@@ -296,7 +343,6 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Product Item in Admin */
     .admin-product-item {
       display: flex;
       align-items: center;
@@ -384,7 +430,6 @@
       color: #DC3545;
     }
 
-    /* Add Product Form */
     .collapse-header {
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-subtle);
@@ -415,43 +460,43 @@
     <div class="admin-header-flex">
       <div>
         <h1 class="admin-brand-title">TEGHI</h1>
-        <span class="admin-brand-badge">✦ Mobile Owner Portal</span>
+        <span class="admin-brand-badge">✦ Showroom Owner Portal</span>
       </div>
       <a href="index.html" class="btn-return-store">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Showroom
+        Back to Showroom
       </a>
     </div>
   </header>
 
   <main class="admin-container">
     
-    <!-- PIN Screen (Visible if not authenticated) -->
+    <!-- PIN Screen -->
     <div id="pin-section" class="pin-auth-card">
       <div class="pin-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
       </div>
-      <h2 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.4rem;">Shop Owner Login</h2>
+      <h2 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.4rem;">Showroom Owner Access</h2>
       <p style="font-size: 0.82rem; color: var(--text-secondary); max-width: 320px; margin: 0 auto;">
-        Apna 4-digit security PIN enter karein taaki aap website ke prices aur WhatsApp number manage kar sakein.
+        Enter your 4-digit master security PIN to manage fabric pricing, inventory status, and showroom WhatsApp routing.
       </p>
       <input type="password" id="owner-pin" class="pin-input" maxlength="4" placeholder="••••" inputmode="numeric">
-      <p id="pin-error" style="color: #dc3545; font-size: 0.78rem; display: none; margin-bottom: 0.75rem;">Galat PIN! Default PIN: 1234</p>
-      <button class="btn-unlock" id="btn-unlock">Unlock Admin Portal</button>
+      <p id="pin-error" style="color: #dc3545; font-size: 0.78rem; display: none; margin-bottom: 0.75rem;">Incorrect PIN. Default demo PIN: 1234</p>
+      <button class="btn-unlock" id="btn-unlock">Unlock Portal</button>
       <div style="margin-top: 1rem;">
-        <span style="font-size: 0.72rem; color: var(--text-muted);">Demo PIN: <strong>1234</strong></span>
+        <span style="font-size: 0.72rem; color: var(--text-muted);">Default Master PIN: <strong>1234</strong></span>
       </div>
     </div>
 
-    <!-- Admin Dashboard (Visible after PIN verified) -->
+    <!-- Admin Dashboard -->
     <div id="dashboard-content" style="display: none;">
 
-      <!-- Monthly Analytics Overview (Requested by User) -->
+      <!-- Monthly Analytics Overview -->
       <section class="analytics-grid">
         <div class="metric-card">
           <div class="metric-title">Monthly Visitors</div>
           <div class="metric-number" id="stat-visitors">1,421</div>
-          <div class="metric-trend">↑ Active</div>
+          <div class="metric-trend">↑ Active Traffic</div>
         </div>
         <div class="metric-card">
           <div class="metric-title">WhatsApp Leads</div>
@@ -461,25 +506,39 @@
         <div class="metric-card highlight">
           <div class="metric-title">Conversion Rate</div>
           <div class="metric-number" id="stat-conversion">13.0%</div>
-          <div class="metric-trend">★ High ROI</div>
+          <div class="metric-trend">★ High Lead ROI</div>
         </div>
+      </section>
+
+      <!-- HERO SLIDER BANNER MANAGER (WITH SMART AUTO-ADJUST) -->
+      <section class="admin-card-section">
+        <h3 class="admin-section-heading">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Hero 3D Coverflow Slider Images
+        </h3>
+        <p class="admin-section-desc">
+          Upload any photo from your phone camera or gallery. Our <strong>Smart Auto-Adjust Engine</strong> will automatically center-crop and normalize the image to fit the 3D coverflow frame without stretching or distortion.
+        </p>
+
+        <!-- Slide items injected via admin.js -->
+        <div id="admin-slides-list"></div>
       </section>
 
       <!-- Store Settings: Dynamic WhatsApp Phone Number (No-Code Feature) -->
       <section class="admin-card-section">
         <h3 class="admin-section-heading">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-          WhatsApp Number (No-Code Setting)
+          WhatsApp Routing (No-Code Setting)
         </h3>
         <p class="admin-section-desc">
-          Yahan apna WhatsApp number update karein. Website ke saare enquiry buttons bina code badle turant aapke naye number par connect ho jayenge.
+          Update your showroom WhatsApp number here. All customer inquiry buttons across the entire website will instantly update to route to this number without altering any source code.
         </p>
         <div class="form-group">
-          <label class="form-label" for="input-wa-number">WhatsApp Enquiry Number (with Country Code):</label>
+          <label class="form-label" for="input-wa-number">Showroom WhatsApp Number (with Country Code):</label>
           <input type="tel" id="input-wa-number" class="form-input" placeholder="e.g. 919876543210">
         </div>
         <button class="btn-save-settings" id="btn-save-phone">
-          <span>Save & Update All Buttons</span>
+          <span>Save & Update All Showroom Buttons</span>
           <span>✓</span>
         </button>
       </section>
@@ -491,15 +550,15 @@
           Fabric Catalogue & Price Editor
         </h3>
         <p class="admin-section-desc">
-          Aap yahan se kapdon ke rates change kar sakte hain aur stock status update kar sakte hain.
+          Update prices per metre or complete dress set rates, and toggle showroom inventory availability.
         </p>
 
         <!-- Product List -->
         <div id="admin-product-list">
-          <!-- Dynamically filled by admin.js -->
+          <!-- Dynamically populated via admin.js -->
         </div>
 
-        <!-- Add New Fabric Button / Form Toggle -->
+        <!-- Add New Fabric -->
         <div style="margin-top: 1.5rem;">
           <div class="collapse-header" id="toggle-add-form">
             <span>+ Add New Fabric from Phone</span>
@@ -509,7 +568,7 @@
           <div class="collapse-content" id="add-product-container">
             <div class="form-group">
               <label class="form-label">Fabric Name:</label>
-              <input type="text" id="new-name" class="form-input" placeholder="e.g. Designer Organza Tissue">
+              <input type="text" id="new-name" class="form-input" placeholder="e.g. Couture Organza Tissue">
             </div>
             <div class="form-group">
               <label class="form-label">Category:</label>
@@ -530,7 +589,7 @@
             </div>
             <div class="form-group">
               <label class="form-label">
-                <input type="checkbox" id="new-has-set"> Has Complete Dress Set Option?
+                <input type="checkbox" id="new-has-set"> Has Complete Coordinated Dress Set?
               </label>
             </div>
             <div class="form-group" id="set-price-group" style="display: none;">
@@ -538,11 +597,11 @@
               <input type="number" id="new-price-set" class="form-input" placeholder="e.g. 5200">
             </div>
             <div class="form-group">
-              <label class="form-label">Upload Photo from Phone Camera/Gallery:</label>
+              <label class="form-label">Upload Photo from Phone Camera / Gallery:</label>
               <input type="file" id="new-photo" accept="image/*" class="form-input" style="padding: 0.4rem;">
             </div>
             <button class="btn-save-settings" id="btn-save-new-fabric" style="width: 100%; justify-content: center;">
-              Add Fabric to Website
+              Publish Fabric to Showroom
             </button>
           </div>
         </div>
@@ -551,7 +610,7 @@
       <!-- Quick Reset Demo Data -->
       <div style="text-align: center; margin-top: 1.5rem;">
         <button id="btn-reset-demo" style="background: none; border: none; font-size: 0.72rem; color: var(--text-muted); text-decoration: underline; cursor: pointer;">
-          Reset to Factory Demo Data
+          Restore Default Demo Catalogue
         </button>
       </div>
 
